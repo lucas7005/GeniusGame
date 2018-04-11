@@ -18,9 +18,9 @@ import javax.swing.JPanel;
 public class Game {
 	
 	
-	boolean verificador = false; //verifica se o jogo foi iniciado apÛs apertar start
-	int lvl = 1; // define a quantidade de vezes que as luzes ser„o piscadas
-	int nivel = 1; //o nÌvel inicial
+	boolean verificador = false; //verifica se o jogo foi iniciado ap√≥s apertar start
+	int lvl = 1; // define a quantidade de vezes que as luzes ser√£o piscadas
+	int nivel = 1; //o n√≠vel inicial
 	List<Integer> valida = new ArrayList<Integer>(); // Recebe a sequencia de cores 
 	List<Integer> answer = new ArrayList<Integer>(); // recebe a resposta
 	ExecutorService executorService = Executors.newSingleThreadExecutor(); // Cria o executor das threads
@@ -28,7 +28,7 @@ public class Game {
 	Player player = new Player(); // Cria o jogador para receber os pontos
 	int pontos = 0; //Pontos
 
-	// ConfigraÁ„o da Janela
+	// Configra√ß√£o da Janela
 	JFrame janela = new JFrame("Genius");
 	JPanel painel = new JPanel(new GridLayout(3, 2, 4, 4));
 	JPanel linha1 = new JPanel(new GridLayout(1, 2, 4, 4));
@@ -36,7 +36,7 @@ public class Game {
 	JPanel linha3 = new JPanel(new GridLayout(1, 1));
 	
 
-	// botıes com os caminhos das imagens
+	// bot√µes com os caminhos das imagens
 	Botao verde = new Botao("image/verde.png", "image/verdeBlink.png");
 	Botao amarelo = new Botao("image/amarelo.png", "image/amareloBlink.png");
 	Botao vermelho = new Botao("image/vermelho.png", "image/vermelhoBlink.png");
@@ -44,7 +44,7 @@ public class Game {
 	Botao start = new Botao("image/start.png", "image/startBlink.png");
 
 	public void desenhaTela() {
-		// Aplica a aÁ„o listener nos botıes
+		// Aplica a a√ß√£o listener nos bot√µes
 		start.addActionListener(new Acao());
 		vermelho.addActionListener(new Acao());
 		verde.addActionListener(new Acao());
@@ -52,7 +52,7 @@ public class Game {
 		amarelo.addActionListener(new Acao());
 
 		
-		// add os botıes no painel conforme o layout
+		// add os bot√µes no painel conforme o layout
 		linha1.add(verde);
 		linha1.add(amarelo);
 		painel.add(linha1);
@@ -75,17 +75,17 @@ public class Game {
 		janela.pack();
 		// centraliza a janela
 		janela.setLocationRelativeTo(null);
-		// torna a janela visÌvel
+		// torna a janela vis√≠vel
 		janela.setVisible(true);
 		
 		
-		//Abre a janela para a inserÁ„o do nome do jogador
+		//Abre a janela para a inser√ß√£o do nome do jogador
 		while(player.getNome() == null) {
 			
 			String nome;
 			nome = JOptionPane.showInputDialog("Qual o seu nome?");
 			
-			//Se o bot„o cancelar for clicado o programa fecha
+			//Se o bot√£o cancelar for clicado o programa fecha
 			if(nome == null) {
 				System.exit(0);
 			}else {				
@@ -149,18 +149,18 @@ public class Game {
 	}
 
 
-	//FunÁ„o para fazer os botıes piscarem em sequencia
+	//Fun√ß√£o para fazer os bot√µes piscarem em sequencia
 	public int sequencia() {
 
 		int jogoIniciado = 1;
 
-		// loop recebe o level com a quantidade de vezes que ser· piscada
+		// loop recebe o level com a quantidade de vezes que ser√° piscada
 		for (int i = count; i < lvl; i++) {
 			// Cria um Random
 			Random r = new Random();
 
-			// Switch recebe o random com n˙meros entre de 0 · 3
-			// cada n˙mero representa uma luz que ser· piscada
+			// Switch recebe o random com n√∫meros entre de 0 √° 3
+			// cada n√∫mero representa uma luz que ser√° piscada
 			switch (r.nextInt(4)) {
 			case 0:
 				valida.add(i, 1);
@@ -181,7 +181,7 @@ public class Game {
 		}
 		
 		
-		//lopp que faz os botıes piscarem conforme a sequencia recebida randomicamente
+		//lopp que faz os bot√µes piscarem conforme a sequencia recebida randomicamente
 		for (int i = 0; i < valida.size(); i++) {
 			
 			//Imprime os valores com as sequencias preenchidas
@@ -211,54 +211,54 @@ public class Game {
 
 	public void logicaJogo() {
 
-		// implementa a lÛgica do jogo
+		// implementa a l√≥gica do jogo
 
 		try {
 			
-			//compara o valor da mesma posiÁ„o dos dois vetores para verificar se o bot„o clicado È o mesmo do que foi pedido
+			//compara o valor da mesma posi√ß√£o dos dois vetores para verificar se o bot√£o clicado √© o mesmo do que foi pedido
 			if (answer.get(count).equals(valida.get(count))) {
 				count++;
 				pontos += 10;
 
-				//Se o contador chega no mesmo valor do level, o list de sequencia recebe mais duas cores
+				//Se o contador chega no mesmo valor do level, o list de sequencia recebe mais uma cor
 				if (count == lvl) {
 					lvl = lvl + 1;
 					nivel++;
 					//if()
-					JOptionPane.showMessageDialog(null, "ParabÈns " + player.getNome() +"!"+ " \nVocÍ passou para o nÌvel " + nivel, "Genius Game",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("image/win.png") );
+					JOptionPane.showMessageDialog(null, "Parab√©ns " + player.getNome() +"!"+ " \nVoc√™ passou para o n√≠vel " + nivel, "Genius Game",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("image/win.png") );
 					try {
 						Thread.sleep(500);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 					
-					//FunÁ„o sequencia È iniciada novamente
+					//Fun√ß√£o sequencia √© iniciada novamente
 					sequencia();
 					
-					//contado recebe zero para percorrer o vetor desde o inicio novamente a cada nÌvel
+					//contado recebe zero para percorrer o vetor desde o inicio novamente a cada n√≠vel
 					count = 0;
 
 				}
 
 			} else {
-				//Insere a pontuaÁ„o na classe player
+				//Insere a pontua√ß√£o na classe player
 				player.setPontos(pontos);
-				JOptionPane.showMessageDialog(null, "Que pena " + player.getNome() + " vocÍ Perdeu! \nSua pontuaÁ„o foi de " + player.getPontos() + " Pontos" + "\nVocÍ Chegou ao NÌvel " + nivel,"Game Over",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("image/lost.png"));
-				//Faz o set de toda a lÛgica voltar ao inicio.
+				JOptionPane.showMessageDialog(null, "Que pena " + player.getNome() + " voc√™ Perdeu! \nSua pontua√ß√£o foi de " + player.getPontos() + " Pontos" + "\nVoc√™ Chegou ao N√≠vel " + nivel,"Game Over",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("image/lost.png"));
+				//Faz o set default de toda a l√≥gica voltar ao inicio.
 				valida.clear();
 				answer.clear();
 				count = 0;
 				lvl = 1;
 				nivel = 0;
 				pontos = 0;
-				//verificador recebe false para que o bot„o start possa ser apertado novamente
+				//verificador recebe false para que o bot√£o start possa ser apertado novamente
 				verificador = false;
 			}
 
 		} catch (IndexOutOfBoundsException e) {
-			// Faz o controle se o bot„o start foi iniciado, ao contrario retornar· uma
+			// Faz o controle se o bot√£o start foi iniciado, ao contrario retornar√° uma
 			// mensagem de erro.
-			JOptionPane.showMessageDialog(null, "Jogo n„o iniciado, inicie o jogo!");
+			JOptionPane.showMessageDialog(null, "Jogo n√£o iniciado, inicie o jogo!");
 		} catch (Exception e) {
 			e.printStackTrace();
 
